@@ -169,3 +169,10 @@ footer {
     #modal-content-body { font-size: 1em; }
     main { margin-top: -100px; }
 }
+/* --- 카드 안에 들어갈 이미지 스타일 --- */
+.content-card img {
+    width: 100%; /* 이미지 가로 폭을 카드 가로 폭에 100% 맞춤 */
+    height: auto; /* 이미지 세로 비율은 자동으로 조절 */
+    margin-bottom: 15px; /* 이미지와 밑의 제목(h3) 사이 간격 */
+    border-radius: 0; /* 카드처럼 둥근 모서리 없음 */
+}
