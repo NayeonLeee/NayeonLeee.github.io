@@ -1,194 +1,177 @@
 /* Noto Sans KR 폰트 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
 
-/* (기본 스타일, container, video-banner 등은 이전과 동일) */
+/* (기본 스타일, container 등은 이전과 동일) */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Noto Sans KR', sans-serif; background-color: #f9f9f9; color: #333; }
 .container { max-width: none; width: 100%; margin: 0; padding: 0; }
-.video-banner { position: relative; width: 100%; height: 100vh; overflow: hidden; }
-.video-banner video { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 1; }
-.banner-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.4); z-index: 2; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 10px; color: white; }
-.banner-text { text-align: center; margin-bottom: -15vh; z-index: 3; }
-.banner-text h2 { color: white; font-size: 4em; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); margin: 0 0 5px 0; }
-.banner-text p { font-size: 1.5em; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); }
-main { max-width: 1400px; margin: 0 auto; padding: 0 40px; background-color: #f9f9f9; }
-.row-title { margin: 70px 0 25px 0; font-size: 1.6em; color: #333; padding-bottom: 10px; border-bottom: 2px solid #eee; }
 
-/* [변경 1: 무드보드 그리드]
-  - 3열 -> 6열 그리드로 변경
-  - 행(row) 높이를 자동으로 조절하도록 변경
-*/
+/* 1. 헤더 & 비디오 배너 */
+.video-banner {
+    position: sticky; /* [변경 1] 스크롤 시 고정되도록 sticky 유지 */
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    padding: 0;
+    z-index: -1; /* [변경 2] 배너를 가장 뒤로 보냄 */
+}
+
+.video-banner video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* 비디오는 오버레이 뒤로 */
+}
+
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 2; /* 오버레이는 비디오 위로 */
+    /* 배너 텍스트가 밖으로 나갔으므로 justify-content, align-items 필요 없음 */
+}
+
+/* [추가] 배너 텍스트를 위한 새로운 컨테이너 */
+.page-title {
+    position: absolute; /* [변경 3] 배너 위에 띄우기 위해 absolute */
+    top: 50%; /* 화면 중앙으로 */
+    left: 50%; /* 화면 중앙으로 */
+    transform: translate(-50%, -50%); /* 정확히 중앙 정렬 */
+    text-align: center;
+    color: white;
+    z-index: 10; /* 가장 위로 올림 */
+    width: 100%;
+    padding: 0 40px;
+}
+
+.page-title h2 {
+    color: white;
+    font-size: 4em; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    margin: 0 0 5px 0;
+}
+
+.page-title p {
+    font-size: 1.5em; 
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+
+/* 2. 메인 콘텐츠 (Z-index 및 배경 투명화) */
+main {
+    max-width: 1400px;
+    margin: 0 auto; 
+    padding: 0 40px; 
+    
+    /* [변경 4] 메인 콘텐츠 배경을 투명하게 만듦 (배너가 비치도록) */
+    background-color: transparent; 
+    
+    /* [변경 5] 메인 콘텐츠가 배너 위로 올라오도록 z-index 설정 */
+    position: relative;
+    z-index: 1; /* 배너 (-1)보다 위에 위치 */
+    
+    /* [변경 6] 콘텐츠가 화면 맨 위에서 시작하도록 음수 마진 설정 */
+    margin-top: -100vh; /* 화면 전체 높이만큼 위로 당겨 올림 */
+    padding-top: 100vh; /* 카드들이 배너 아래에서 시작하도록 다시 패딩으로 밀어냄 */
+}
+
+/* 2-1. 행 제목 */
+.row-title {
+    margin: 70px 0 25px 0; 
+    font-size: 1.6em;
+    color: #333;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eee;
+}
+
+/* 2-2. 무드보드 그리드 */
 .content-grid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr); /* 6열 기반으로 변경 */
-    grid-auto-rows: minmax(100px, auto); /* 행의 최소 높이 지정 */
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: minmax(100px, auto);
     gap: 25px; 
 }
 
-/* [변경 2: 카드 기본 스타일] - 클릭 가능하도록 커서 변경 */
+/* [변경 7] 카드 스타일 변경: 그림자 및 둥글리기 제거 */
 .content-card {
     background-color: #ffffff;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    /* border-radius: 8px; [삭제] */
     padding: 25px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    transition: transform 0.3s, box-shadow 0.3s;
-    cursor: pointer; /* 클릭 가능하다는 표시 */
+    /* box-shadow: 0 2px 5px rgba(0,0,0,0.05); [삭제] */
+    transition: transform 0.3s, box-shadow 0.3s; /* hover 효과를 위해 shadow는 유지 */
+    cursor: pointer;
 }
 .content-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1); /* hover 시 그림자는 유지 */
 }
 .content-card h3 { margin-bottom: 15px; color: #34495e; }
 
-/* [변경 3: 카드별 크기 및 위치 지정 (무드보드)] 
-  스케치와 비슷하게 자유롭게 배치합니다.
-*/
-.card-1 { /* Arts */
-    grid-column: 3 / span 2; /* 3번 열에서 시작해서 2칸 차지 */
-    grid-row: 1 / span 2; /* 1번 행에서 시작해서 2칸 차지 */
-}
-.card-2 { /* Books */
-    grid-column: 1 / span 2;
-    grid-row: 1 / span 3;
-    min-height: 250px;
-}
-.card-3 { /* Movies */
-    grid-column: 5 / span 2;
-    grid-row: 1 / span 3;
-    min-height: 300px;
-}
-.card-4 { /* Footprints */
-    grid-column: 2 / span 3;
-    grid-row: 4 / span 2;
-}
-.card-5 { /* Project A */
-    grid-column: 1 / span 2;
-    grid-row: 4;
-}
-.card-6 { /* Project B */
-    grid-column: 5 / span 2;
-    grid-row: 4 / span 2;
-    min-height: 200px;
-}
-.card-7 { /* Music */
-    grid-column: 3 / span 2;
-    grid-row: 3 / span 1;
-}
+/* (카드별 크기 및 위치 지정은 이전과 동일) */
+.card-1 { grid-column: 3 / span 2; grid-row: 1 / span 2; }
+.card-2 { grid-column: 1 / span 2; grid-row: 1 / span 3; min-height: 250px; }
+.card-3 { grid-column: 5 / span 2; grid-row: 1 / span 3; min-height: 300px; }
+.card-4 { grid-column: 2 / span 3; grid-row: 4 / span 2; }
+.card-5 { grid-column: 1 / span 2; grid-row: 4; }
+.card-6 { grid-column: 5 / span 2; grid-row: 4 / span 2; min-height: 200px; }
+.card-7 { grid-column: 3 / span 2; grid-row: 3 / span 1; }
 
-/* [추가: 팝업(모달) 스타일] 
-  인스타그램처럼 보이게 하는 팝업 스타일
-*/
-.modal {
-    display: none; /* 평소에는 숨김 */
-    position: fixed; /* 화면 전체에 고정 */
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto; /* 내용 많으면 스크롤 */
-    background-color: rgba(0, 0, 0, 0.7); /* 반투명 검은색 배경 */
-    /* 팝업창을 중앙 정렬하기 위한 flex */
-    justify-content: center;
-    align-items: center;
-}
+/* 팝업(모달) 스타일은 이전과 동일 */
+.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.7); justify-content: center; align-items: center; }
+.modal-content { background-color: #fff; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.25); width: 80%; max-width: 600px; min-height: 300px; padding: 30px; position: relative; animation: zoomIn 0.3s ease-out; }
+@keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.modal-close { color: #aaa; position: absolute; top: 15px; right: 25px; font-size: 28px; font-weight: bold; cursor: pointer; }
+.modal-close:hover { color: #333; }
+#modal-title { font-size: 1.8em; color: #34495e; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+#modal-content-body { font-size: 1.1em; line-height: 1.7; color: #555; }
 
-.modal-content {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.25);
-    width: 80%;
-    max-width: 600px; /* 최대 너비 */
-    min-height: 300px;
-    padding: 30px;
+/* 3. 풋터 */
+footer {
+    max-width: 1400px;
+    margin: 80px auto 40px auto;
+    padding: 30px 40px;
+    text-align: center;
+    border-top: 2px solid #eee;
+    color: #777;
+    font-size: 0.9em;
+    background-color: #f9f9f9;
+    /* [변경 8] 풋터도 z-index 설정 */
     position: relative;
-    animation: zoomIn 0.3s ease-out; /* 줌인 효과 */
+    z-index: 1;
 }
-
-/* 팝업창 줌인 애니메이션 */
-@keyframes zoomIn {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
-
-.modal-close {
-    color: #aaa;
-    position: absolute;
-    top: 15px;
-    right: 25px;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-.modal-close:hover {
-    color: #333;
-}
-
-#modal-title {
-    font-size: 1.8em;
-    color: #34495e;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
-}
-
-#modal-content-body {
-    font-size: 1.1em;
-    line-height: 1.7;
-    color: #555;
-}
-
-
-/* (footer 스타일은 이전과 동일) */
-footer { max-width: 1400px; margin: 80px auto 40px auto; padding: 30px 40px; text-align: center; border-top: 2px solid #eee; color: #777; font-size: 0.9em; background-color: #f9f9f9; }
 .footer-links { margin-bottom: 15px; }
 .footer-links a { color: #555; text-decoration: none; margin: 0 10px; }
 .footer-links a:hover { text-decoration: underline; color: #3498db; }
 .footer-license p { margin: 5px 0; line-height: 1.6; }
 
-/* (반응형 스타일 수정) */
+/* --- 반응형 웹 디자인 --- */
 @media (max-width: 992px) {
     main, footer { padding: 0 30px; }
-    /* 무드보드 -> 2열 그리드로 변경 */
-    .content-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    /* 카드별 CSS 초기화 */
-    .content-card {
-        grid-column: auto / span 1;
-        grid-row: auto / span 1;
-        min-height: 180px; /* 최소 높이 통일 */
-    }
+    .video-banner { padding: 0; }
+    .content-grid { grid-template-columns: repeat(2, 1fr); }
+    .content-card { grid-column: auto / span 1; grid-row: auto / span 1; min-height: 180px; } /* 카드별 CSS 초기화 */
+    .page-title h2 { font-size: 3em; }
+    .page-title p { font-size: 1.2em; }
 }
+
 @media (max-width: 576px) {
     main, footer { padding: 0 20px; }
+    .video-banner { padding: 0; }
     .banner-text h2 { font-size: 2.2em; }
     .banner-text p { font-size: 1em; }
     .row-title { font-size: 1.4em; margin-top: 50px; }
-    /* 무드보드 -> 1열 그리드로 변경 */
-    .content-grid {
-        grid-template-columns: 1fr;
-    }
-    .modal-content {
-        width: 90%;
-        padding: 20px;
-    }
+    .content-grid { grid-template-columns: 1fr; }
+    .modal-content { width: 90%; padding: 20px; }
     #modal-title { font-size: 1.5em; }
     #modal-content-body { font-size: 1em; }
+    .page-title h2 { font-size: 2.5em; } /* 모바일 텍스트 크기 더 작게 */
+    .page-title p { font-size: 1.1em; } /* 모바일 텍스트 크기 더 작게 */
 }
-
-.background-music {
-    position: fixed; /* 화면에 고정 */
-    bottom: 20px;
-    right: 20px;
-    z-index: 999; /* 항상 위에 표시 */
-    opacity: 0.7; /* 살짝 투명하게 */
-    transition: opacity 0.3s;
-}
-
-.background-music:hover {
-    opacity: 1.0; /* 마우스 올리면 진하게 */
-}
-
-
