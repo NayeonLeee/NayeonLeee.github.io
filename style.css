@@ -1,0 +1,95 @@
+/* 기본 스타일 초기화 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* 스케치의 전체적인 틀 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto; /* 중앙 정렬 */
+    padding: 20px;
+}
+
+/* 1. 헤더 영역 (스케치 상단) */
+header {
+    display: flex;
+    justify-content: space-between; /* 양쪽 끝으로 정렬 */
+    align-items: center;
+    padding: 20px 10px;
+    border-bottom: 2px solid #eee; /* 스케치의 경계선 */
+    margin-bottom: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.logo {
+    font-size: 1.8em;
+    color: #2c3e50;
+}
+
+.filter-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filter-button:hover {
+    background-color: #2980b9;
+}
+
+/* 2. 메인 콘텐츠 그리드 (스케치 하단) */
+.content-grid {
+    display: grid;
+    
+    /* 스케치처럼 한 줄에 4개의 카드를 배치 */
+    grid-template-columns: repeat(4, 1fr); 
+    
+    gap: 20px; /* 카드 사이의 간격 */
+}
+
+/* 콘텐츠 카드 (스케치의 네모 박스) */
+.content-card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px; /* 스케치처럼 모서리를 둥글게 */
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    min-height: 150px; /* 카드의 최소 높이 */
+}
+
+.content-card h3 {
+    margin-bottom: 10px;
+    color: #34495e;
+}
+
+/* --- 반응형 웹 디자인 --- */
+/* 화면이 작아질 때(태블릿) 2열로 변경 */
+@media (max-width: 992px) {
+    .content-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 화면이 더 작아질 때(모바일) 1열로 변경 */
+@media (max-width: 576px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    header {
+        flex-direction: column; /* 헤더 요소를 세로로 쌓음 */
+        gap: 15px;
+    }
+}
