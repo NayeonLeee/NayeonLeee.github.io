@@ -1,222 +1,181 @@
 /* Noto Sans KR 폰트 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
 
-/* 기본 스타일 초기화 */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+/* (기본 스타일, container, video-banner 등은 이전과 동일) */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Noto Sans KR', sans-serif; background-color: #f9f9f9; color: #333; }
+.container { max-width: none; width: 100%; margin: 0; padding: 0; }
+.video-banner { position: relative; width: 100%; height: 100vh; overflow: hidden; }
+.video-banner video { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 1; }
+.banner-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.4); z-index: 2; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 10px; color: white; }
+.banner-text { text-align: center; margin-bottom: -15vh; z-index: 3; }
+.banner-text h2 { color: white; font-size: 4em; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); margin: 0 0 5px 0; }
+.banner-text p { font-size: 1.5em; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); }
+main { max-width: 1400px; margin: 0 auto; padding: 0 40px; background-color: #f9f9f9; }
+.row-title { margin: 70px 0 25px 0; font-size: 1.6em; color: #333; padding-bottom: 10px; border-bottom: 2px solid #eee; }
 
-body {
-    font-family: 'Noto Sans KR', sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
-}
-
-.container {
-    max-width: none;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-/* 1. 헤더 & 비디오 배너 (가장 큰 변경!) */
-.video-banner {
-    position: sticky; /* [변경 1] 스크롤해도 상단에 고정 (스티키) */
-    top: 0; /* 상단 0px 위치에 고정 */
-    
-    width: 100%;
-    
-    /* [변경 2] 배너 높이를 화면 세로 길이 100%로 설정 (100vh) */
-    height: 100vh; 
-    
-    overflow: hidden;
-    padding: 0px;
-    z-index: 10; /* 다른 요소들보다 위에 있도록 설정 */
-    
-    /* [변경 3] 'scrolled' 상태가 될 때 부드럽게 변하도록 transition 추가 */
-    transition: height 0.4s ease-in-out, background-color 0.4s;
-}
-
-.video-banner video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    transition: opacity 0.4s; /* 비디오도 부드럽게 사라지도록 */
-}
-
-.banner-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 10px;
-    color: white;
-    transition: background-color 0.4s;
-}
-
-/* --- [핵심] 스크롤이 내려갔을 때 (.scrolled) --- */
-
-.video-banner.scrolled {
-    /* [변경 4] 스크롤 내리면 헤더 높이를 80px로 축소 */
-    height: 80px; 
-    /* 스크롤 내렸을 때 흰색 배경으로 변경 (선택 사항) */
-    background-color: #ffffff; 
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.video-banner.scrolled video,
-.video-banner.scrolled .banner-text {
-    /* [변경 5] 스크롤 내리면 비디오와 배너 텍스트는 숨김 */
-    display: none;
-    opacity: 0;
-}
-
-.video-banner.scrolled .banner-overlay {
-    /* 스크롤 내리면 검은 오버레이도 투명하게 */
-    background-color: transparent;
-}
-
-.video-banner.scrolled .category-nav {
-    /* 축소된 헤더에서 카테고리 위치 조정 (중앙) */
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-}
-
-.video-banner.scrolled .header-top {
-    width: 100%;
-    height: 100%;
-    padding: 0 20px;
-}
-
-.video-banner.scrolled .logo,
-.video-banner.scrolled .category-nav li a {
-    /* [변경 6] 배경이 흰색이 되니 글자색을 검은색으로 변경 */
-    color: #333;
-}
-.video-banner.scrolled .logo {
-    font-size: 1.5em; /* 로고 크기 살짝 줄임 */
-}
-
-/* ------------------------------------------- */
-
-/* 1-3. 배너 텍스트 (위치 및 크기 조정) */
-.banner-text {
-    text-align: center;
-    /* [변경] 기존 padding-bottom 제거, 스케치에 맞게 위치 조정 */
-    /* 현재 justify-content: center; align-items: center; 로 중앙 정렬됨 */
-    margin-bottom: -15vh; /* [변경] 스케치에서 'about me'가 아래쪽에 있었으므로 음수 마진으로 살짝 내림 */
-    z-index: 3;
-}
-
-.banner-text h2 {
-    color: white;
-    /* [변경] 스케치에 맞게 폰트 크기 조정 */
-    font-size: 4em; 
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-    margin: 0 0 5px 0; /* [변경] 간격 조정 */
-}
-
-.banner-text p {
-    font-size: 1.5em; /* [변경] 스케치에 맞게 폰트 크기 조정 */
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-}
-
-/* 2. 메인 콘텐츠 (중요!) */
-main {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 40px;
-    
-    /* [변경 7] 메인 콘텐츠가 헤더(스티키) 위에 올라오도록 설정 */
-    position: relative;
-    z-index: 5; /* 헤더보다 낮지만, 비디오보단 높게 */
-    
-    /* [변경 8] 콘텐츠가 스크롤될 때 배경이 비치지 않도록 배경색 지정 */
-    background-color: #f9f9f9; 
-}
-
-/* 2-1. 행 제목 */
-.row-title {
-    /* [변경 9] 첫 번째 행이 스티키 헤더에 가려지지 않도록 위쪽 여백 추가 */
-    margin: 70px 0 25px 0;
-    font-size: 1.6em;
-    color: #333;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #eee;
-}
-/* ... (이하 .content-grid, .content-card, footer, @media 등은 이전과 동일) ... */
-
-/* (이전 CSS 코드의 나머지 부분을 여기에 붙여넣으세요) */
-/* --- (이전 CSS 코드) --- */
+/* [변경 1: 무드보드 그리드]
+  - 3열 -> 6열 그리드로 변경
+  - 행(row) 높이를 자동으로 조절하도록 변경
+*/
 .content-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+    grid-template-columns: repeat(6, 1fr); /* 6열 기반으로 변경 */
+    grid-auto-rows: minmax(100px, auto); /* 행의 최소 높이 지정 */
+    gap: 25px; 
 }
+
+/* [변경 2: 카드 기본 스타일] - 클릭 가능하도록 커서 변경 */
 .content-card {
     background-color: #ffffff;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 25px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    min-height: 180px;
     transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer; /* 클릭 가능하다는 표시 */
 }
 .content-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 15px rgba(0,0,0,0.1);
 }
-.content-card h3 {
-    margin-bottom: 15px;
+.content-card h3 { margin-bottom: 15px; color: #34495e; }
+
+/* [변경 3: 카드별 크기 및 위치 지정 (무드보드)] 
+  스케치와 비슷하게 자유롭게 배치합니다.
+*/
+.card-1 { /* Arts */
+    grid-column: 3 / span 2; /* 3번 열에서 시작해서 2칸 차지 */
+    grid-row: 1 / span 2; /* 1번 행에서 시작해서 2칸 차지 */
+}
+.card-2 { /* Books */
+    grid-column: 1 / span 2;
+    grid-row: 1 / span 3;
+    min-height: 250px;
+}
+.card-3 { /* Movies */
+    grid-column: 5 / span 2;
+    grid-row: 1 / span 3;
+    min-height: 300px;
+}
+.card-4 { /* Footprints */
+    grid-column: 2 / span 3;
+    grid-row: 4 / span 2;
+}
+.card-5 { /* Project A */
+    grid-column: 1 / span 2;
+    grid-row: 4;
+}
+.card-6 { /* Project B */
+    grid-column: 5 / span 2;
+    grid-row: 4 / span 2;
+    min-height: 200px;
+}
+.card-7 { /* Music */
+    grid-column: 3 / span 2;
+    grid-row: 3 / span 1;
+}
+
+/* [추가: 팝업(모달) 스타일] 
+  인스타그램처럼 보이게 하는 팝업 스타일
+*/
+.modal {
+    display: none; /* 평소에는 숨김 */
+    position: fixed; /* 화면 전체에 고정 */
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* 내용 많으면 스크롤 */
+    background-color: rgba(0, 0, 0, 0.7); /* 반투명 검은색 배경 */
+    /* 팝업창을 중앙 정렬하기 위한 flex */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+    width: 80%;
+    max-width: 600px; /* 최대 너비 */
+    min-height: 300px;
+    padding: 30px;
+    position: relative;
+    animation: zoomIn 0.3s ease-out; /* 줌인 효과 */
+}
+
+/* 팝업창 줌인 애니메이션 */
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal-close {
+    color: #aaa;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.modal-close:hover {
+    color: #333;
+}
+
+#modal-title {
+    font-size: 1.8em;
     color: #34495e;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
 }
-footer {
-    max-width: 1400px;
-    margin: 80px auto 40px auto;
-    padding: 30px 40px;
-    text-align: center;
-    border-top: 2px solid #eee;
-    color: #777;
-    font-size: 0.9em;
+
+#modal-content-body {
+    font-size: 1.1em;
+    line-height: 1.7;
+    color: #555;
 }
+
+
+/* (footer 스타일은 이전과 동일) */
+footer { max-width: 1400px; margin: 80px auto 40px auto; padding: 30px 40px; text-align: center; border-top: 2px solid #eee; color: #777; font-size: 0.9em; background-color: #f9f9f9; }
 .footer-links { margin-bottom: 15px; }
 .footer-links a { color: #555; text-decoration: none; margin: 0 10px; }
 .footer-links a:hover { text-decoration: underline; color: #3498db; }
 .footer-license p { margin: 5px 0; line-height: 1.6; }
+
+/* (반응형 스타일 수정) */
 @media (max-width: 992px) {
     main, footer { padding: 0 30px; }
-    .video-banner { padding: 0 30px; }
-    .content-grid { grid-template-columns: repeat(2, 1fr); }
+    /* 무드보드 -> 2열 그리드로 변경 */
+    .content-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    /* 카드별 CSS 초기화 */
+    .content-card {
+        grid-column: auto / span 1;
+        grid-row: auto / span 1;
+        min-height: 180px; /* 최소 높이 통일 */
+    }
 }
 @media (max-width: 576px) {
     main, footer { padding: 0 20px; }
-    .video-banner { padding: 0 20px; }
-    .banner-text h2 { font-size: 1.8em; }
+    .banner-text h2 { font-size: 2.2em; }
     .banner-text p { font-size: 1em; }
-    .category-nav ul { flex-direction: column; align-items: center; }
-    .header-top { flex-direction: column; gap: 10px; }
     .row-title { font-size: 1.4em; margin-top: 50px; }
-    .content-grid { grid-template-columns: 1fr; }
-    /* 모바일에서는 스크롤 헤더가 좁을 수 있으니 조정 */
-    .video-banner.scrolled {
-        height: 60px; /* 모바일 축소 높이 */
+    /* 무드보드 -> 1열 그리드로 변경 */
+    .content-grid {
+        grid-template-columns: 1fr;
     }
-    .video-banner.scrolled .logo { font-size: 1.2em; }
-    .video-banner.scrolled .filter-button { padding: 5px 10px; font-size: 0.8em; }
-
+    .modal-content {
+        width: 90%;
+        padding: 20px;
+    }
+    #modal-title { font-size: 1.5em; }
+    #modal-content-body { font-size: 1em; }
 }
 
 .background-music {
@@ -231,4 +190,5 @@ footer {
 .background-music:hover {
     opacity: 1.0; /* 마우스 올리면 진하게 */
 }
+
 
