@@ -4,20 +4,19 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { 
     font-family: 'Noto Sans KR', sans-serif; 
-    background-color: #f9f9f9; 
+    background-color: #f9f9f9; /* 기본 배경색은 유지 (푸터 등) */
     color: #333; 
-    /* [핵심 변경] 스크롤 시 오버플로우 방지 */
     overflow-x: hidden;
 }
 .container { max-width: none; width: 100%; margin: 0; padding: 0; }
 
-/* 1. 헤더 & 비디오 배너 (기존 스티키 제거) */
+/* 1. 헤더 & 비디오 배너 (변경 없음) */
 .video-banner {
-    position: relative; /* [변경] sticky 대신 relative */
+    position: relative;
     width: 100%;
     height: 100vh; 
     overflow: hidden;
-    z-index: 1; /* [변경] 메인 콘텐츠보다 위에 있도록 z-index 조정 */
+    z-index: 1; 
 }
 .video-banner video {
     width: 100%;
@@ -36,21 +35,16 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.4);
     z-index: 2;
-    display: flex; /* 텍스트 중앙 정렬 유지 */
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px; /* [변경] 텍스트가 바깥으로 안 나가므로 padding은 다시 살짝 */
+    padding: 10px;
     color: white;
 }
-
-/* [삭제] .page-title 관련 CSS 블록 전체 삭제 */
-
-/* 1-3. 배너 텍스트 (위치 및 크기 조정) */
 .banner-text {
     text-align: center;
     z-index: 3;
-    /* [변경] banner-overlay 안으로 들어갔으므로 margin-bottom 조정 */
     margin-bottom: -15vh; 
 }
 .banner-text h2 {
@@ -64,22 +58,21 @@ body {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-/* 2. 메인 콘텐츠 (스크롤 오버 효과 재구현) */
+/* 2. 메인 콘텐츠 (배경 투명화) */
 main {
     max-width: 1400px;
     margin: 0 auto; 
     padding: 0 40px; 
-    background-color: #f9f9f9; /* [변경] 메인 콘텐츠 배경색 유지 */
+    background-color: transparent; /* [변경 1] 배경 투명으로 변경 */
     position: relative;
-    z-index: 2; /* [변경] 배너(1) 위에 올라오도록 z-index 조정 */
-    margin-top: -150px; /* [변경] 배너 위로 올라오는 초기 위치 조정 */
-    border-top-left-radius: 20px; /* [추가] 올라온 부분 둥글게 */
-    border-top-right-radius: 20px; /* [추가] 올라온 부분 둥글게 */
-    box-shadow: 0 -10px 20px rgba(0,0,0,0.1); /* [추가] 올라온 부분 그림자 */
-    transition: transform 0.8s ease-out; /* [핵심 변경] 부드러운 스크롤 애니메이션 */
+    z-index: 2;
+    margin-top: -150px; 
+    /* [변경 2] 투명하므로 radius와 shadow 제거 */
+    /* border-top-left-radius: 20px; */
+    /* border-top-right-radius: 20px; */
+    /* box-shadow: 0 -10px 20px rgba(0,0,0,0.1); */
+    transition: transform 0.8s ease-out;
 }
-
-/* [삭제] .row-title 관련 CSS 블록 전체 삭제 */
 
 /* 2-2. 무드보드 그리드 */
 .content-grid {
@@ -87,30 +80,33 @@ main {
     grid-template-columns: repeat(6, 1fr);
     grid-auto-rows: minmax(100px, auto);
     gap: 25px; 
-    padding-top: 50px; /* [변경] .row-title이 사라졌으므로, 카드 상단 여백 추가 */
+    padding-top: 50px;
 }
 
-/* [요청사항 반영] 그림자, 둥근 모서리 제거 */
 .content-card {
     background-color: #ffffff;
     border: 1px solid #ddd;
-    border-radius: 0; /* 둥근 모서리 제거 */
+    border-radius: 0; 
     padding: 25px;
-    box-shadow: none; /* 그림자 제거 */
+    box-shadow: none; 
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
 }
 .content-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.1); /* 마우스 올릴 때만 그림자 */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1); 
 }
 .content-card h3 { margin-bottom: 15px; color: #34495e; }
 
-/* (카드별 크기 및 위치 지정은 이전과 동일) */
+/* (카드 배치) */
 .card-1 { grid-column: 3 / span 2; grid-row: 1 / span 2; }
 .card-2 { grid-column: 1 / span 2; grid-row: 1 / span 3; min-height: 250px; }
 .card-3 { grid-column: 5 / span 2; grid-row: 1 / span 3; min-height: 300px; }
-.card-4 { grid-column: 2 / span 3; grid-row: 4 / span 2; }
+.card-4 { 
+    /* [변경 3] 겹침 문제 해결: row 4 -> 5로 변경 */
+    grid-column: 2 / span 3; 
+    grid-row: 5 / span 2; 
+}
 .card-5 { grid-column: 1 / span 2; grid-row: 4; }
 .card-6 { grid-column: 5 / span 2; grid-row: 4 / span 2; min-height: 200px; }
 .card-7 { grid-column: 3 / span 2; grid-row: 3 / span 1; }
@@ -124,7 +120,7 @@ footer {
     border-top: 2px solid #eee;
     color: #777;
     font-size: 0.9em;
-    background-color: #f9f9f9; 
+    background-color: #f9f9f9; /* [변경 4] 풋터 배경색은 다시 살려둠 */
     position: relative;
     z-index: 1; 
 }
@@ -133,7 +129,7 @@ footer {
 .footer-links a:hover { text-decoration: underline; color: #3498db; }
 .footer-license p { margin: 5px 0; line-height: 1.6; }
 
-/* 4. 팝업(모달) 스타일은 이전과 동일 */
+/* 4. 팝업(모달) 스타일 (변경 없음) */
 .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.7); justify-content: center; align-items: center; }
 .modal-content { background-color: #fff; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.25); width: 80%; max-width: 600px; min-height: 300px; padding: 30px; position: relative; animation: zoomIn 0.3s ease-out; }
 @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
@@ -142,7 +138,7 @@ footer {
 #modal-title { font-size: 1.8em; color: #34495e; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
 #modal-content-body { font-size: 1.1em; line-height: 1.7; color: #555; }
 
-/* 5. 오디오 플레이어 스타일 (화면 우측 하단 고정) */
+/* 5. 오디오 플레이어 스타일 (변경 없음) */
 .background-music {
     position: fixed; 
     bottom: 20px;
@@ -155,7 +151,7 @@ footer {
     opacity: 1.0; 
 }
 
-/* 6. 반응형 (태블릿/모바일) */
+/* 6. 반응형 (변경 없음) */
 @media (max-width: 992px) {
     main, footer { padding: 0 30px; }
     .content-grid { grid-template-columns: repeat(2, 1fr); }
@@ -171,6 +167,5 @@ footer {
     .modal-content { width: 90%; padding: 20px; }
     #modal-title { font-size: 1.5em; }
     #modal-content-body { font-size: 1em; }
-    /* 모바일에서는 메인 콘텐츠가 너무 많이 올라오지 않도록 조정 */
     main { margin-top: -100px; }
 }
