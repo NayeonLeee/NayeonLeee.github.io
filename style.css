@@ -59,16 +59,15 @@ body {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-/* 2. 메인 콘텐츠 (배경 투명화) */
 main {
-    main {
+    /* main {  <-- 이 중복된 줄이 문제였습니다. 제거함 */
     max-width: 1400px;
     margin: 0 auto; 
     padding: 0 40px; 
     background-color: transparent;
     position: relative;
     z-index: 2;
-    margin-top: -100px; /* 이 값을 -80px, -120px 등으로 조절해보세요 */
+    margin-top: -100px; 
     transition: transform 0.8s ease-out;
 }
 
@@ -162,6 +161,7 @@ footer {
     margin-bottom: 15px; /* 이미지와 밑의 제목(h3) 사이 간격 */
     border-radius: 0; /* 카드처럼 둥근 모서리 없음 */
 }
+
 
 
 
