@@ -8,12 +8,13 @@
 </head>
 <body>
 
-    <audio src="‪bg.mp3" controls loop class="background-music"></audio> 
+    <audio src="bg.mp3" controls loop class="background-music"></audio>
 
     <div class="container">
-        
-        <header class="‪b.jpg"> 
-            <img src="b.jpg" alt="배너 이미지"> 
+
+        <!-- 상단 배너 -->
+        <header class="image-banner">
+            <img src="b.jpg" alt="배너 이미지">
             <div class="banner-overlay">
                 <div class="banner-text">
                     <h2>Yottna's</h2>
@@ -22,112 +23,42 @@
             </div>
         </header>
 
+        <!-- 콘텐츠 -->
         <main>
-            <section class="content-row">
-                <div class="content-grid">
-                    
-                    <div class="content-card card-1">
-                        <img src="1.jpg" alt="포스터">
-                        <h3>Arts 01</h3>
-                        <p>가장 최근 본 영화, 에반게리온 사도신생(1997)</p>
-                    </div>
+            <div class="content-grid">
 
-                    <div class="content-card card-2">
-                        <img src="2.jpg" alt="포스터">
-                        <h3>Arts 02</h3>
-                        <p>예술 관련 설명...</p>
-                    </div>
+                <div class="content-card">
+                    <img src="1.jpg" alt="포스터">
+                    <h3>Arts 01</h3>
+                    <p>가장 최근 본 영화, 에반게리온 사도신생(1997)</p>
+                </div>
 
-                    <div class="content-card card-3">
-                        <img src="3.jpg" alt="포스터">
-                        <h3>Arts 03</h3>
-                        <p>예술 관련 설명...</p>
-                    </div>
+                <div class="content-card">
+                    <img src="2.jpg" alt="포스터">
+                    <h3>Arts 02</h3>
+                    <p>예술 관련 설명...</p>
+                </div>
 
-                    <div class="content-card card-4">
-                        <img src="assets/art-image.jpg" alt="포스터">
-                        <h3>Arts 04</h3>
-                        <p>예술 관련 설명...</p>
-                    </div>
+                <div class="content-card">
+                    <img src="3.jpg" alt="포스터">
+                    <h3>Arts 03</h3>
+                    <p>예술 관련 설명...</p>
+                </div>
 
-                    <div class="content-card card-5">
-                        <img src="assets/art-image.jpg" alt="포스터">
-                        <h3>Arts 05</h3>
-                        <p>예술 관련 설명...</p>
-                    </div>
+                <div class="content-card">
+                    <img src="4.jpg" alt="포스터">
+                    <h3>Arts 04</h3>
+                    <p>예술 관련 설명...</p>
+                </div>
 
-                    <div class="content-card card-6">
-                        <img src="assets/art-image.jpg" alt="포스터">
-                        <h3>Arts 06</h3>
-                        <p>예술 관련 설명...</p>
-                    </div>
+                <!-- 필요 카드 그대로 이어붙이면 됨 -->
 
-                    <div class="content-card card-7">
-                        <img src="assets/art-image.jpg" alt="포스터">
-                        <h3>Arts 07</h3>
-                        <p>예술 관련 설명...</p>
-                    </div>
-
-                    <div class="content-card card-8">
-                        <img src="assets/art-image.jpg" alt="포스터">
-                        <h3>Arts 08</h3>
-                        <p>예술 관련 설명...</p>
-                    </div>
-                    
-                    <div class="content-card card-9">
-                        <img src="assets/art-image.jpg" alt="포스터">
-                        <h3>Arts 09</h3>
-                        <p>예술 관련 설명...</p>
-                    </div>
-
-                    <div class="content-card card-10">
-                        <img src="assets/art-image.jpg" alt="포스터">
-                        <h3>Arts 10</h3>
-                        <p>예술 관련 설명...</p>
-                    </div>
-
-                    <div class="content-card card-11">
-                        <img src="assets/art-image.jpg" alt="포스터">
-                        <h3>Arts 11</h3>
-                        <p>예술 관련 설명...</p>
-                    </div>
-
-                    <div class="content-card card-12">
-                        <img src="assets/art-image.jpg" alt="포스터">
-                        <h3>Arts 12</h3>
-                        <p>예술 관련 설명...</p>
-                    </div>
-
-                    <div class="content-card card-13">
-                        <img src="assets/art-image.jpg" alt="포스터">
-                        <h3>Arts 13</h3>
-                        <p>예술 관련 설명...</p>
-                    </div>
-
-                    <div class="content-card card-14">
-                        <img src="assets/art-image.jpg" alt="포스터">
-                        <h3>Arts 14</h3>
-                        <p>예술 관련 설명...</p>
-                    </div>
-
-                    <div class="content-card card-15">
-                        <img src="assets/art-image.jpg" alt="포스터">
-                        <h3>Arts 15</h3>
-                        <p>예술 관련 설명...</p>
-                    </div>
-
-                    <div class="content-card card-16">
-                        <img src="assets/art-image.jpg" alt="포스터">
-                        <h3>Arts 16</h3>
-                        <p>예술 관련 설명...</p>
-                    </div>
-
-                </div> </section>
+            </div>
         </main>
 
         <footer>
             <div class="footer-links">
-                <a href="#">@yottean33</a> | 
+                <a href="#">@yottean33</a> |
                 <a href="#">Instagram</a>
             </div>
             <div class="footer-license">
@@ -135,17 +66,7 @@
             </div>
         </footer>
 
-    </div> 
-
-    <div id="modal-popup" class="modal">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <h2 id="modal-title"></h2>
-            <div id="modal-content-body"></div>
-        </div>
     </div>
-
-    <script src="script.js"></script>
 
 </body>
 </html>
