@@ -60,7 +60,7 @@ body {
 
 /* 2. 메인 콘텐츠 (배경 투명화) */
 main {
-    max-width: 1400px;
+    max-width: 1800px;
     margin: 0 auto; 
     padding: 0 40px; 
     background-color: transparent; /* [변경 1] 배경 투명으로 변경 */
@@ -164,4 +164,5 @@ footer {
     margin-bottom: 15px; /* 이미지와 밑의 제목(h3) 사이 간격 */
     border-radius: 0; /* 카드처럼 둥근 모서리 없음 */
 }
+
 
