@@ -1,27 +1,30 @@
-/* Noto Sans KR 폰트 */
+/* 폰트 불러오기 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
+
 body { 
     font-family: 'Noto Sans KR', sans-serif; 
-    background-color: #f9f9f9; /* 기본 배경색은 유지 (푸터 등) */
+    background-color: #f9f9f9; 
     color: #333; 
     overflow-x: hidden;
 }
+
 .container { max-width: none; width: 100%; margin: 0; padding: 0; }
 
-/* 1. 헤더 & 이미지 배너 (변경) */
-.image-banner { /* 클래스 이름을 image-banner로 변경 */
+/* 1. 상단 배너 (이미지) */
+.image-banner {
     position: relative;
     width: 100%;
-    height: 66.67vh; /* 2/3 크기로 줄임 */
+    height: 66.67vh; /* 2/3 크기 */
     overflow: hidden;
     z-index: 1;
 }
-.image-banner img { /* img 태그에 대한 스타일 추가 */
+
+.image-banner img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 이미지가 잘리지 않고 채워지도록 */
+    object-fit: cover;
     position: absolute;
     top: 0;
     left: 0;
@@ -43,39 +46,40 @@ body {
     padding: 10px;
     color: white;
 }
+
 .banner-text {
     text-align: center;
     z-index: 3;
-    margin-bottom: -15vh; 
+    margin-bottom: -5vh; 
 }
+
 .banner-text h2 {
     color: white;
     font-size: 4em; 
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
     margin: 0 0 5px 0;
 }
+
 .banner-text p {
     font-size: 1.5em; 
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
+/* 2. 메인 콘텐츠 구역 */
 main {
-    /* main {  <-- 이 중복된 줄이 문제였습니다. 제거함 */
     max-width: 1400px;
     margin: 0 auto; 
     padding: 0 40px; 
     background-color: transparent;
     position: relative;
     z-index: 2;
-    margin-top: -100px; 
-    transition: transform 0.8s ease-out;
+    margin-top: -80px; /* 배너 위로 살짝 겹치게 */
 }
 
-/* 2-2. 무드보드 그리드 */
+/* 3. 카드 그리드 (4줄 정렬) */
 .content-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4열로 변경 */
-    grid-auto-rows: auto; /* auto로 변경 (선택 사항) */
+    grid-template-columns: repeat(4, 1fr); /* 가로 4개 */
     gap: 25px; 
     padding-top: 50px;
 }
@@ -83,20 +87,32 @@ main {
 .content-card {
     background-color: #ffffff;
     border: 1px solid #ddd;
-    border-radius: 0; 
     padding: 25px;
-    box-shadow: none; 
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
+    min-height: 350px; /* 카드 높이 */
+    display: flex;
+    flex-direction: column;
 }
+
 .content-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 15px rgba(0,0,0,0.1); 
 }
-.content-card h3 { margin-bottom: 15px; color: #34495e; }
 
+.content-card img {
+    width: 100%; 
+    height: auto; 
+    margin-bottom: 15px; 
+    object-fit: cover;
+}
 
-/* 3. 풋터 */
+.content-card h3 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+/* 4. 풋터 */
 footer {
     max-width: 1400px;
     margin: 80px auto 40px auto;
@@ -104,64 +120,27 @@ footer {
     text-align: center;
     border-top: 2px solid #eee;
     color: #777;
-    font-size: 0.9em;
-    background-color: #f9f9f9; /* [변경 4] 풋터 배경색은 다시 살려둠 */
-    position: relative;
-    z-index: 1; 
 }
-.footer-links { margin-bottom: 15px; }
-.footer-links a { color: #555; text-decoration: none; margin: 0 10px; }
-.footer-links a:hover { text-decoration: underline; color: #3498db; }
-.footer-license p { margin: 5px 0; line-height: 1.6; }
 
-/* 4. 팝업(모달) 스타일 (변경 없음) */
-.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.7); justify-content: center; align-items: center; }
-.modal-content { background-color: #fff; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.25); width: 80%; max-width: 600px; min-height: 300px; padding: 30px; position: relative; animation: zoomIn 0.3s ease-out; }
-@keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-.modal-close { color: #aaa; position: absolute; top: 15px; right: 25px; font-size: 28px; font-weight: bold; cursor: pointer; }
-.modal-close:hover { color: #333; }
-#modal-title { font-size: 1.8em; color: #34495e; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
-#modal-content-body { font-size: 1.1em; line-height: 1.7; color: #555; }
+.footer-links a {
+    color: #555;
+    text-decoration: none;
+    margin: 0 10px;
+}
 
-/* 5. 오디오 플레이어 스타일 (변경 없음) */
+/* 5. 음악 플레이어 */
 .background-music {
     position: fixed; 
     bottom: 20px;
     right: 20px;
     z-index: 999; 
     opacity: 0.7; 
-    transition: opacity 0.3s;
-}
-.background-music:hover {
-    opacity: 1.0; 
 }
 
-/* 6. 반응형 (변경 없음) */
+/* 6. 모바일 반응형 */
 @media (max-width: 992px) {
-    main, footer { padding: 0 30px; }
     .content-grid { grid-template-columns: repeat(2, 1fr); }
-    .content-card { grid-column: auto / span 1; grid-row: auto / span 1; min-height: 180px; }
-    .banner-text h2 { font-size: 3em; }
-    .banner-text p { font-size: 1.2em; }
 }
 @media (max-width: 576px) {
-    main, footer { padding: 0 20px; }
-    .banner-text h2 { font-size: 2.2em; }
-    .banner-text p { font-size: 1em; }
     .content-grid { grid-template-columns: 1fr; }
-    .modal-content { width: 90%; padding: 20px; }
-    #modal-title { font-size: 1.5em; }
-    #modal-content-body { font-size: 1em; }
-    main { margin-top: -100px; }
 }
-/* --- 카드 안에 들어갈 이미지 스타일 --- */
-.content-card img {
-    width: 100%; /* 이미지 가로 폭을 카드 가로 폭에 100% 맞춤 */
-    height: auto; /* 이미지 세로 비율은 자동으로 조절 */
-    margin-bottom: 15px; /* 이미지와 밑의 제목(h3) 사이 간격 */
-    border-radius: 0; /* 카드처럼 둥근 모서리 없음 */
-}
-
-
-
-
